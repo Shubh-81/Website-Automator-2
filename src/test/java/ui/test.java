@@ -107,8 +107,6 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 			ChromeDriver driver = new ChromeDriver();
 			driver.get("https://edms.toyoindia.com:501/WrenchWebProduction/AccessControl/Login");
 			driver.manage().window().maximize();
-	        login(driver,"RITESHT","RT@sch00l");
-	        upload(driver);
 		}
 	}
 	
