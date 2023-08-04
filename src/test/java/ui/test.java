@@ -5,6 +5,7 @@
 	import org.openqa.selenium.By;
 	import org.openqa.selenium.WebElement;
 	import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -15,6 +16,52 @@ import java.util.Scanner;
 import io.github.bonigarcia.wdm.WebDriverManager;
 	
 	public class test {
+		
+		public static void upload(ChromeDriver driver) throws InterruptedException {
+			 
+			WebElement smartFolderButt= driver.findElement(By.xpath("//*[@id=\"a_menu_3\"]"));
+			smartFolderButt.click();
+			WebElement toToyo= driver.findElement(By.xpath("//*[@id=\"row1grdFavSmartFolder\"]/div[3]/div/span[2]"));
+			toToyo.click();
+			
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(7));
+			WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("liMore")));
+			WebElement ele = driver.findElement(By.id("liMore"));
+
+			//Creating object of an Actions class
+			Actions threeDots = new Actions(driver);
+
+			//Performing the mouse hover action on the target element.
+			threeDots.moveToElement(ele).perform();
+			WebElement el = driver.findElement(By.id("148"));
+
+			//Creating object of an Actions class
+			Actions addDocument = new Actions(driver);
+
+			//Performing the mouse hover action on the target element.
+			addDocument.moveToElement(el).perform();
+			
+			WebElement single= driver.findElement(By.id("149"));
+			single.click();
+			WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(30));
+			WebElement element1 = wait1.until(ExpectedConditions.visibilityOfElementLocated(By.id("DOC_NO")));
+			WebElement documentNumber = wait1.until(ExpectedConditions.visibilityOfElementLocated(By.id("DOC_NO")));
+	        documentNumber.sendKeys("122453");
+	        WebElement sheetNumber = wait1.until(ExpectedConditions.visibilityOfElementLocated(By.id("SHEET_NO")));
+	        sheetNumber.sendKeys("someNu12");
+	        WebElement docDescri = wait1.until(ExpectedConditions.visibilityOfElementLocated(By.id("DOC_DESCRIPTION")));
+	        docDescri.sendKeys("the eternal sunshine of the spotless mind");
+	        // to upload the file 
+//	        WebElement selectFile= driver.findElement(By.id("btnBrowseFile"));
+//			selectFile.click();
+//			Thread.sleep(10000);
+	        
+			WebElement chooseFile = wait1.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"file\"]")));
+			chooseFile.sendKeys("Path to file");
+			Thread.sleep(4500);
+			WebElement add= wait1.until(ExpectedConditions.visibilityOfElementLocated(By.id("btnAdd")));
+			add.click();
+		}
 		
 		public static void download(ChromeDriver driver) {
 			WebElement DocumentList = driver.findElement(By.id("docLi"));
@@ -60,8 +107,8 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 			ChromeDriver driver = new ChromeDriver();
 			driver.get("https://edms.toyoindia.com:501/WrenchWebProduction/AccessControl/Login");
 			driver.manage().window().maximize();
-	        login(driver,"username","password");
-	        download(driver);
+	        login(driver,"RITESHT","RT@sch00l");
+	        upload(driver);
 		}
 	}
 	
